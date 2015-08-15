@@ -28,6 +28,10 @@ class DataCollector:
         http = urllib3.PoolManager(cert_reqs='CERT_REQUIRED', ca_certs=certifi.where())
         self._r = http.request('GET', self._url)
 
+        if self._r.status != 200:
+            print("Something went wrong getting the files!")
+            exit()
+
     #Prints matchid data
     def printData(self):
         if not self._r:
