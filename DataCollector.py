@@ -11,7 +11,8 @@ class DataCollector:
         self._matchid = matchid
         self._region  = region
 
-        self._api_key = "02944942-d70a-4bd7-a210-6f81c5a88c2c"
+        with open("key.txt") as infile:
+            self._api_key = infile.read()
         self._include_timeline = "false"
 
         #Create URL for search
@@ -19,7 +20,7 @@ class DataCollector:
         if items is False:
             self._url = "https://na.api.pvp.net/api/lol/{}/v2.2/match/{}?includeTimeline={}&api_key={}".format(self._region, self._matchid, self._include_timeline,self._api_key)
         else:
-            self._url = "https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?api_key=02944942-d70a-4bd7-a210-6f81c5a88c2c"
+            self._url = "https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?api_key={}".format(self._api_key)
 
         self.fetchData()
 
